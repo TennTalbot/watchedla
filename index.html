@@ -3,12 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WATCHED.LA — Know Who's Watching You in Los Angeles</title>
-  <meta name="description" content="A free iOS app that shows you which surveillance cameras are watching you in Los Angeles — and helps you find routes with fewer cameras." />
+  <title>WATCHED.LA | Know Who's Watching You in Los Angeles</title>
+  <meta name="description" content="A free iPhone app that shows you which surveillance cameras are watching you in Los Angeles and helps you find routes with fewer cameras." />
   <meta property="og:title" content="WATCHED.LA" />
-  <meta property="og:description" content="Know which cameras are watching you in Los Angeles. Free iOS app. No data collected. Coming soon." />
+  <meta property="og:description" content="Know which cameras are watching you in Los Angeles. Free iPhone app. No data collected. Get early access now." />
   <meta property="og:url" content="https://watched.la" />
   <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -16,11 +18,13 @@
     :root {
       --bg:        #0a0a0f;
       --surface:   #12121a;
+      --surface-2: #1a1a28;
       --border:    rgba(255,255,255,0.07);
       --text:      #f0f0f5;
       --muted:     #888899;
       --blue:      #3b82f6;
       --blue-dim:  rgba(59,130,246,0.12);
+      --blue-glow: rgba(59,130,246,0.25);
       --red:       #ef4444;
       --green:     #22c55e;
       --orange:    #f97316;
@@ -31,7 +35,7 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
@@ -39,342 +43,235 @@
     a { color: var(--blue); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    /* ── Layout ── */
-    .container {
-      max-width: 780px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
+    .container { max-width: 820px; margin: 0 auto; padding: 0 24px; }
+    .container-wide { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
     section { padding: 80px 0; }
 
     /* ── Nav ── */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       background: rgba(10,10,15,0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
     nav .inner {
-      max-width: 780px;
-      margin: 0 auto;
-      padding: 16px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      max-width: 820px; margin: 0 auto; padding: 14px 24px;
+      display: flex; align-items: center; justify-content: space-between;
     }
-    .wordmark {
-      font-size: 1.1rem;
-      font-weight: 800;
-      letter-spacing: 0.05em;
-      color: var(--text);
-    }
+    .wordmark { font-size: 1.1rem; font-weight: 800; letter-spacing: 0.05em; color: var(--text); }
     .wordmark span { color: var(--blue); }
-    nav a.cta-sm {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--blue);
-      border: 1px solid var(--blue);
-      padding: 6px 16px;
-      border-radius: 99px;
+    .nav-right { display: flex; align-items: center; gap: 14px; }
+    .lang-toggle {
+      display: flex; align-items: center; gap: 0;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 99px; padding: 2px; font-size: 0.8rem; font-weight: 600;
     }
-    nav a.cta-sm:hover { background: var(--blue-dim); text-decoration: none; }
+    .lang-toggle button {
+      padding: 5px 12px; border: none; border-radius: 99px;
+      background: transparent; color: var(--muted); cursor: pointer;
+      font-size: 0.8rem; font-weight: 600; font-family: inherit;
+      transition: all 0.2s;
+    }
+    .lang-toggle button.active {
+      background: var(--blue); color: #fff;
+    }
+    nav a.cta-sm {
+      font-size: 0.82rem; font-weight: 600; color: #fff;
+      background: var(--blue); padding: 7px 18px; border-radius: 99px;
+      transition: opacity 0.2s; white-space: nowrap;
+    }
+    nav a.cta-sm:hover { opacity: 0.85; text-decoration: none; }
 
     /* ── Hero ── */
-    .hero {
-      padding: 160px 0 80px;
-      text-align: center;
-    }
+    .hero { padding: 150px 0 60px; text-align: center; }
     .hero-badge {
-      display: inline-block;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--orange);
-      background: rgba(249,115,22,0.1);
-      border: 1px solid rgba(249,115,22,0.25);
-      padding: 5px 14px;
-      border-radius: 99px;
-      margin-bottom: 28px;
+      display: inline-block; font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--green); background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.25);
+      padding: 5px 14px; border-radius: 99px; margin-bottom: 28px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.2); }
+      50% { box-shadow: 0 0 0 8px rgba(34,197,94,0); }
     }
     .hero h1 {
-      font-size: clamp(2.4rem, 6vw, 4rem);
-      font-weight: 900;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      margin-bottom: 24px;
+      font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 900;
+      line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 24px;
     }
-    .hero h1 em {
-      font-style: normal;
-      color: var(--blue);
-    }
-    .hero p {
-      font-size: clamp(1.05rem, 2.5vw, 1.25rem);
-      color: var(--muted);
-      max-width: 560px;
-      margin: 0 auto 40px;
-      line-height: 1.7;
+    .hero h1 em { font-style: normal; color: var(--blue); }
+    .hero p.lead {
+      font-size: clamp(1.05rem, 2.5vw, 1.25rem); color: var(--muted);
+      max-width: 600px; margin: 0 auto 40px; line-height: 1.7;
     }
 
-    /* ── Signup form ── */
-    .signup-form {
-      display: flex;
-      gap: 10px;
-      max-width: 440px;
-      margin: 0 auto 16px;
-      flex-wrap: wrap;
-      justify-content: center;
+    /* ── CTA ── */
+    .cta-group { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 16px; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 16px 32px; background: var(--blue); color: #fff;
+      font-size: 1.05rem; font-weight: 700; border-radius: 14px;
+      border: none; cursor: pointer; transition: all 0.2s; text-decoration: none;
     }
-    .signup-form input {
-      flex: 1;
-      min-width: 220px;
-      padding: 14px 18px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      color: var(--text);
-      font-size: 1rem;
-      outline: none;
-      transition: border-color 0.2s;
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); text-decoration: none; }
+    .btn-primary svg { width: 22px; height: 22px; }
+    .cta-note { font-size: 0.8rem; color: var(--muted); }
+
+    /* ── iPhone-only banner ── */
+    .platform-note {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.82rem; color: var(--muted);
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 6px 16px; border-radius: 99px; margin-top: 14px;
     }
-    .signup-form input::placeholder { color: var(--muted); }
-    .signup-form input:focus { border-color: var(--blue); }
-    .signup-form button {
-      padding: 14px 26px;
-      background: var(--blue);
-      color: #fff;
-      border: none;
-      border-radius: 12px;
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: opacity 0.2s;
-      white-space: nowrap;
-    }
-    .signup-form button:hover { opacity: 0.85; }
-    .signup-note {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
+    .platform-note svg { width: 16px; height: 16px; opacity: 0.7; }
 
     /* ── Stat bar ── */
     .stat-bar {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      flex-wrap: wrap;
-      padding: 32px 0;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      margin: 60px 0 0;
+      display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;
+      padding: 32px 0; border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border); margin: 60px 0 0;
     }
     .stat { text-align: center; }
-    .stat-number {
-      font-size: 1.8rem;
-      font-weight: 900;
-      color: var(--text);
-      letter-spacing: -0.02em;
+    .stat-number { font-size: 1.8rem; font-weight: 900; color: var(--text); letter-spacing: -0.02em; }
+    .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+
+    /* ── App Preview ── */
+    .app-preview { padding: 80px 0 40px; }
+    .app-preview .section-label, .app-preview h2 { text-align: center; }
+    .app-preview h2 { margin-bottom: 48px; }
+    .preview-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 900px; margin: 0 auto; }
+    .preview-card { text-align: center; }
+    .preview-card .phone-frame {
+      position: relative; border-radius: 28px; overflow: hidden;
+      background: var(--surface); border: 2px solid var(--border);
+      aspect-ratio: 9/19.5;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px var(--blue-glow);
+      transition: transform 0.3s, box-shadow 0.3s;
     }
-    .stat-label {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-top: 2px;
+    .preview-card .phone-frame:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 60px var(--blue-glow);
     }
+    .preview-card .phone-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .preview-label { margin-top: 16px; font-weight: 600; font-size: 0.9rem; }
+    .preview-sublabel { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
 
     /* ── Section headers ── */
     .section-label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 12px;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--blue); margin-bottom: 12px;
     }
     h2 {
-      font-size: clamp(1.6rem, 4vw, 2.4rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      line-height: 1.2;
-      margin-bottom: 16px;
+      font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 800;
+      letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 16px;
     }
-    .section-intro {
-      font-size: 1.1rem;
-      color: var(--muted);
-      max-width: 560px;
-      line-height: 1.7;
-      margin-bottom: 48px;
+    .section-intro { font-size: 1.1rem; color: var(--muted); max-width: 560px; line-height: 1.7; margin-bottom: 48px; }
+
+    /* ── How it works callout ── */
+    .callout-box {
+      background: var(--blue-dim); border: 1px solid rgba(59,130,246,0.2);
+      border-radius: 14px; padding: 20px 24px;
+      display: flex; align-items: flex-start; gap: 14px;
+      margin-top: 24px; margin-bottom: 12px;
     }
+    .callout-box .icon { font-size: 1.5rem; flex-shrink: 0; }
+    .callout-box p { font-size: 0.92rem; color: var(--text); line-height: 1.6; }
+    .callout-box strong { color: var(--blue); }
 
     /* ── Features ── */
     .features { display: flex; flex-direction: column; gap: 20px; }
     .feature-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 32px;
-      display: flex;
-      gap: 24px;
-      align-items: flex-start;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; padding: 32px; display: flex; gap: 24px;
+      align-items: flex-start; transition: border-color 0.2s;
     }
+    .feature-card:hover { border-color: rgba(255,255,255,0.12); }
     .feature-icon {
-      font-size: 2rem;
-      flex-shrink: 0;
-      width: 56px;
-      height: 56px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--blue-dim);
-      border-radius: 14px;
+      font-size: 2rem; flex-shrink: 0; width: 56px; height: 56px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--blue-dim); border-radius: 14px;
     }
-    .feature-card h3 {
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .feature-card p {
-      color: var(--muted);
-      font-size: 0.95rem;
-      line-height: 1.65;
-    }
+    .feature-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; }
+    .feature-card p { color: var(--muted); font-size: 0.95rem; line-height: 1.65; }
     .feature-tag {
-      display: inline-block;
-      font-size: 0.7rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 3px 10px;
-      border-radius: 99px;
-      margin-bottom: 10px;
+      display: inline-block; font-size: 0.7rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      padding: 3px 10px; border-radius: 99px; margin-bottom: 10px;
     }
     .tag-blue { background: var(--blue-dim); color: var(--blue); }
     .tag-orange { background: rgba(249,115,22,0.1); color: var(--orange); }
+    .tag-green { background: rgba(34,197,94,0.1); color: var(--green); }
 
-    /* ── How it works ── */
+    /* ── Steps ── */
     .steps { display: flex; flex-direction: column; gap: 0; }
-    .step {
-      display: flex;
-      gap: 20px;
-      padding: 28px 0;
-      border-bottom: 1px solid var(--border);
-    }
+    .step { display: flex; gap: 20px; padding: 28px 0; border-bottom: 1px solid var(--border); }
     .step:last-child { border-bottom: none; }
     .step-num {
-      font-size: 0.8rem;
-      font-weight: 800;
-      color: #fff;
-      background: var(--blue);
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-top: 2px;
+      font-size: 0.8rem; font-weight: 800; color: #fff; background: var(--blue);
+      width: 28px; height: 28px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;
     }
     .step h4 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
     .step p { color: var(--muted); font-size: 0.95rem; line-height: 1.6; }
 
-    /* ── Data promise ── */
-    .promise-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-    }
+    /* ── Promise ── */
+    .promise-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
     .promise-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 24px;
-      text-align: center;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 24px; text-align: center; transition: border-color 0.2s;
     }
+    .promise-card:hover { border-color: rgba(255,255,255,0.12); }
     .promise-card .icon { font-size: 1.8rem; margin-bottom: 12px; }
     .promise-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
     .promise-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
 
-    /* ── Camera types ── */
+    /* ── Cameras ── */
     .camera-list { display: flex; flex-direction: column; gap: 12px; }
     .camera-row {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 16px 20px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
+      display: flex; align-items: center; gap: 16px; padding: 16px 20px;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
     }
-    .camera-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    .dot-red    { background: var(--red); }
-    .dot-orange { background: var(--orange); }
-    .dot-yellow { background: #eab308; }
-    .dot-green  { background: var(--green); }
+    .camera-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+    .dot-red { background: var(--red); } .dot-orange { background: var(--orange); }
+    .dot-yellow { background: #eab308; } .dot-green { background: var(--green); }
     .camera-row-name { font-weight: 600; font-size: 0.95rem; flex: 1; }
-    .camera-row-risk {
-      font-size: 0.75rem;
-      font-weight: 600;
-      padding: 3px 10px;
-      border-radius: 99px;
-    }
+    .camera-row-risk { font-size: 0.75rem; font-weight: 600; padding: 3px 10px; border-radius: 99px; }
     .risk-critical { background: rgba(239,68,68,0.12); color: var(--red); }
-    .risk-high     { background: rgba(249,115,22,0.12); color: var(--orange); }
-    .risk-medium   { background: rgba(234,179,8,0.12); color: #eab308; }
+    .risk-high { background: rgba(249,115,22,0.12); color: var(--orange); }
+    .risk-medium { background: rgba(234,179,8,0.12); color: #eab308; }
 
     /* ── Partners ── */
     .partner-links { display: flex; flex-direction: column; gap: 12px; }
     .partner-link {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 18px 20px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      color: var(--text);
-      transition: border-color 0.2s;
+      display: flex; align-items: center; gap: 16px; padding: 18px 20px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; color: var(--text); transition: border-color 0.2s;
     }
     .partner-link:hover { border-color: var(--blue); text-decoration: none; }
     .partner-link .arrow { margin-left: auto; color: var(--muted); font-size: 0.9rem; }
     .partner-link .name { font-weight: 600; font-size: 0.95rem; }
     .partner-link .desc { font-size: 0.82rem; color: var(--muted); margin-top: 2px; }
 
-    /* ── Footer CTA ── */
-    .footer-cta {
-      text-align: center;
-      padding: 80px 0;
-      border-top: 1px solid var(--border);
-    }
+    /* ── Footer ── */
+    .footer-cta { text-align: center; padding: 80px 0; border-top: 1px solid var(--border); }
     .footer-cta h2 { margin-bottom: 16px; }
     .footer-cta p { color: var(--muted); margin-bottom: 36px; font-size: 1.05rem; }
+    footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; }
+    footer p { font-size: 0.8rem; color: var(--muted); line-height: 1.8; }
+    footer a { color: var(--muted); } footer a:hover { color: var(--text); }
 
-    /* ── Footer ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 32px 0;
-      text-align: center;
+    @media (max-width: 700px) {
+      .preview-grid { gap: 12px; }
+      .preview-card .phone-frame { border-radius: 18px; }
     }
-    footer p {
-      font-size: 0.8rem;
-      color: var(--muted);
-      line-height: 1.8;
-    }
-    footer a { color: var(--muted); }
-    footer a:hover { color: var(--text); }
-
-    /* ── Responsive ── */
     @media (max-width: 560px) {
       .feature-card { flex-direction: column; }
       .stat-bar { gap: 24px; }
       section { padding: 60px 0; }
+      .preview-grid { grid-template-columns: 1fr; max-width: 260px; }
+      .callout-box { flex-direction: column; }
     }
   </style>
 </head>
@@ -384,63 +281,121 @@
 <nav>
   <div class="inner">
     <span class="wordmark">WATCHED<span>.</span>LA</span>
-    <a href="#notify" class="cta-sm">Get Early Access</a>
+    <div class="nav-right">
+      <div class="lang-toggle">
+        <button class="active" onclick="setLang('en')">EN</button>
+        <button onclick="setLang('es')">ES</button>
+      </div>
+      <a href="#early-access" class="cta-sm" data-en="Get Early Access" data-es="Acceso Anticipado"></a>
+    </div>
   </div>
 </nav>
 
 <!-- Hero -->
 <div class="hero">
   <div class="container">
-    <div class="hero-badge">🔴 Coming Soon — Los Angeles</div>
-    <h1>Los Angeles is<br>watching you.<br><em>Now you can watch back.</em></h1>
-    <p>A free iOS app that shows you which surveillance cameras are tracking you in real time — and helps you find routes with fewer cameras on your commute.</p>
+    <div class="hero-badge" data-en="✅ Beta: Now Available on iPhone" data-es="✅ Beta: Disponible en iPhone"></div>
+    <h1 data-en='Los Angeles is<br>watching you.<br><em>Now you can watch back.</em>' data-es='Los Ángeles te<br>está vigilando.<br><em>Ahora tú puedes vigilar de vuelta.</em>'></h1>
+    <p class="lead" data-en="A free iPhone app that maps surveillance cameras in LA and finds routes with fewer cameras. We find the route, your maps app drives." data-es="Una app gratuita para iPhone que mapea cámaras de vigilancia en LA y encuentra rutas con menos cámaras. Nosotros encontramos la ruta, tu app de mapas te guía."></p>
 
-    <form class="signup-form" id="notify" onsubmit="handleSignup(event)">
-      <input type="email" placeholder="your@email.com" required id="email-input" />
-      <button type="submit">Notify Me</button>
-    </form>
-    <p class="signup-note" id="signup-msg">Free. No spam. We'll email you when it launches.</p>
+    <div class="cta-group" id="early-access">
+      <a href="#" class="btn-primary" id="testflight-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        <span data-en="Get Early Access via TestFlight" data-es="Acceso Anticipado por TestFlight"></span>
+      </a>
+    </div>
+    <p class="cta-note" data-en="Free on iPhone. No account required. No data collected." data-es="Gratis en iPhone. Sin cuenta. Sin datos recolectados."></p>
+    <div class="platform-note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+      <span data-en="iPhone only. Android coming soon." data-es="Solo iPhone. Android próximamente."></span>
+    </div>
 
     <div class="stat-bar">
       <div class="stat">
         <div class="stat-number">3,000+</div>
-        <div class="stat-label">Cameras mapped in LA</div>
+        <div class="stat-label" data-en="Cameras mapped in LA" data-es="Cámaras mapeadas en LA"></div>
       </div>
       <div class="stat">
         <div class="stat-number">$0</div>
-        <div class="stat-label">Cost to you, ever</div>
+        <div class="stat-label" data-en="Cost to you, ever" data-es="Costo para ti, siempre"></div>
       </div>
       <div class="stat">
         <div class="stat-number">0</div>
-        <div class="stat-label">Bytes of your data collected</div>
+        <div class="stat-label" data-en="Bytes of your data collected" data-es="Bytes de tus datos recolectados"></div>
       </div>
     </div>
   </div>
 </div>
 
+<!-- App Preview -->
+<section class="app-preview">
+  <div class="container-wide">
+    <div class="section-label" data-en="See It In Action" data-es="Míralo en Acción"></div>
+    <h2 data-en="Three taps. Full picture." data-es="Tres toques. Panorama completo."></h2>
+
+    <div class="preview-grid">
+      <div class="preview-card">
+        <div class="phone-frame">
+          <img src="img/route.png" alt="Route tab" loading="lazy" />
+        </div>
+        <div class="preview-label" data-en="Find Private Routes" data-es="Encuentra Rutas Privadas"></div>
+        <div class="preview-sublabel" data-en="We find the route. Your maps app drives." data-es="Encontramos la ruta. Tu app de mapas conduce."></div>
+      </div>
+      <div class="preview-card">
+        <div class="phone-frame">
+          <img src="img/watched.png" alt="Watched tab" loading="lazy" />
+        </div>
+        <div class="preview-label" data-en="Check Your Location" data-es="Revisa Tu Ubicación"></div>
+        <div class="preview-sublabel" data-en="See cameras within 200m of you" data-es="Ve cámaras a 200m de ti"></div>
+      </div>
+      <div class="preview-card">
+        <div class="phone-frame">
+          <img src="img/info.png" alt="Info tab" loading="lazy" />
+        </div>
+        <div class="preview-label" data-en="Know Your Rights" data-es="Conoce Tus Derechos"></div>
+        <div class="preview-sublabel" data-en="Real California privacy laws" data-es="Leyes reales de privacidad de California"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- What it does -->
 <section>
   <div class="container">
-    <div class="section-label">What It Does</div>
-    <h2>Two things. Done simply.</h2>
-    <p class="section-intro">No account required. No tracking. Just open it and know what's around you.</p>
+    <div class="section-label" data-en="What It Does" data-es="Qué Hace"></div>
+    <h2 data-en="Three tools. Zero data collected." data-es="Tres herramientas. Cero datos recolectados."></h2>
+    <p class="section-intro" data-en="No account required. No tracking. Just open it and know what's around you." data-es="Sin cuenta. Sin rastreo. Solo ábrelo y conoce lo que te rodea."></p>
 
     <div class="features">
       <div class="feature-card">
         <div class="feature-icon">🗺️</div>
         <div>
-          <div class="feature-tag tag-blue">My Route</div>
-          <h3>Find a safer commute</h3>
-          <p>Type where you're going. We show you up to 3 routes — each with a Privacy Score based on how many surveillance cameras are along the way. Fewer cameras, higher score. Pick the route that feels right for you.</p>
+          <div class="feature-tag tag-blue" data-en="Route Finder" data-es="Buscador de Rutas"></div>
+          <h3 data-en="Find the most private route" data-es="Encuentra la ruta más privada"></h3>
+          <p data-en="Enter your destination. We show up to 3 routes, each with a Privacy Score based on nearby surveillance cameras. Pick the most private one and open it in Apple Maps, Google Maps, or Waze." data-es="Escribe a dónde vas. Te mostramos hasta 3 rutas, cada una con un Puntaje de Privacidad basado en cámaras de vigilancia cercanas. Elige la más privada y ábrela en Apple Maps, Google Maps, o Waze."></p>
+
+          <div class="callout-box">
+            <div class="icon">📤</div>
+            <p data-en="<strong>Not a navigation app.</strong> We find the most private route, then hand it off to your preferred maps app for driving directions." data-es="<strong>No es una app de navegación.</strong> Encontramos la ruta más privada y la enviamos a tu app de mapas preferida para las indicaciones."></p>
+          </div>
         </div>
       </div>
 
       <div class="feature-card">
         <div class="feature-icon">👁️</div>
         <div>
-          <div class="feature-tag tag-orange">Am I Being Watched?</div>
-          <h3>See who's watching right now</h3>
-          <p>Tap one button. We check for cameras within 200 meters of where you're standing — ALPRs, PTZ cameras, speed cameras, traffic cameras. See exactly what's nearby, how far away, and what data each camera collects.</p>
+          <div class="feature-tag tag-orange" data-en="Am I Being Watched?" data-es="¿Me Están Vigilando?"></div>
+          <h3 data-en="See who's watching right now" data-es="Ve quién te vigila ahora mismo"></h3>
+          <p data-en="One tap. We scan for cameras within 200 meters: ALPRs, PTZ cameras, speed cameras, traffic cameras. See what's nearby and what each one collects." data-es="Un toque. Escaneamos cámaras dentro de 200 metros: ALPRs, cámaras PTZ, de velocidad, de tráfico. Ve qué hay cerca y qué recolecta cada una."></p>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">⚖️</div>
+        <div>
+          <div class="feature-tag tag-green" data-en="Know Your Rights" data-es="Conoce Tus Derechos"></div>
+          <h3 data-en="Real laws that protect you" data-es="Leyes reales que te protegen"></h3>
+          <p data-en="Learn about SB 34, AB 645, CCPA, and other California privacy laws. Available in English and Spanish." data-es="Conoce la SB 34, AB 645, CCPA, y otras leyes de privacidad de California. Disponible en inglés y español."></p>
         </div>
       </div>
     </div>
@@ -450,37 +405,37 @@
 <!-- How it works -->
 <section style="background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
   <div class="container">
-    <div class="section-label">How It Works</div>
-    <h2>Built on public data.<br>Runs on your phone.</h2>
-    <p class="section-intro">Everything WATCHED.LA shows you comes from public records, community contributors, and city disclosures.</p>
+    <div class="section-label" data-en="How It Works" data-es="Cómo Funciona"></div>
+    <h2 data-en='Built on public data.<br>Runs on your iPhone.' data-es='Basado en datos públicos.<br>Corre en tu iPhone.'></h2>
+    <p class="section-intro" data-en="Everything WATCHED.LA shows you comes from public records, community contributors, and city disclosures." data-es="Todo lo que WATCHED.LA te muestra proviene de registros públicos, contribuidores comunitarios, y datos gubernamentales."></p>
 
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
         <div>
-          <h4>Camera Database</h4>
-          <p>We map thousands of surveillance cameras in Los Angeles using OpenStreetMap contributors, FOIA requests, LAPD and LADOT public disclosures, and investigative reporting. Nothing secret — just organized for the first time.</p>
+          <h4 data-en="Camera Database" data-es="Base de Datos de Cámaras"></h4>
+          <p data-en="We map thousands of surveillance cameras in Los Angeles using OpenStreetMap contributors, FOIA requests, LAPD and LADOT public disclosures, and investigative reporting." data-es="Mapeamos miles de cámaras de vigilancia en Los Ángeles usando contribuidores de OpenStreetMap, solicitudes FOIA, datos públicos de LAPD y LADOT, y reportajes investigativos."></p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div>
-          <h4>Privacy Score</h4>
-          <p>Each camera has a risk level based on what it collects and who it shares data with. Flock Safety ALPRs that feed into the JRIC federal fusion center score differently than a basic traffic camera. Your route score reflects that.</p>
+          <h4 data-en="Privacy Score" data-es="Puntaje de Privacidad"></h4>
+          <p data-en="Each camera has a risk level based on what it collects and who receives its data. A Flock Safety ALPR reported to feed federal databases scores differently than a basic traffic camera." data-es="Cada cámara tiene un nivel de riesgo basado en qué recolecta y quién recibe sus datos. Un ALPR de Flock Safety que se reporta alimenta bases de datos federales se califica diferente que una cámara de tráfico básica."></p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <div>
-          <h4>Everything Stays on Your Phone</h4>
-          <p>WATCHED.LA never sends your location, routes, or searches to any server. We don't know who you are. Processing happens entirely on your device.</p>
+          <h4 data-en="Handoff to Your Maps App" data-es="Envío a Tu App de Mapas"></h4>
+          <p data-en="We find the most private route, then send it to Apple Maps, Google Maps, or Waze. Watched LA does not provide turn-by-turn navigation." data-es="Encontramos la ruta más privada y la enviamos a Apple Maps, Google Maps, o Waze. Watched LA no provee navegación paso a paso."></p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">4</div>
         <div>
-          <h4>Free. Always.</h4>
-          <p>No subscription. No ads. No premium tier. This is a public interest project. You shouldn't have to pay to know who's watching you.</p>
+          <h4 data-en="Everything Stays on Your iPhone" data-es="Todo Se Queda en Tu iPhone"></h4>
+          <p data-en="WATCHED.LA never sends your location, routes, or searches to any server. We don't know who you are. Processing happens entirely on your device." data-es="WATCHED.LA nunca envía tu ubicación, rutas, o búsquedas a ningún servidor. No sabemos quién eres. Todo el procesamiento ocurre en tu dispositivo."></p>
         </div>
       </div>
     </div>
@@ -490,42 +445,42 @@
 <!-- Camera types -->
 <section>
   <div class="container">
-    <div class="section-label">What We Track</div>
-    <h2>Not all cameras are equal.</h2>
-    <p class="section-intro">WATCHED.LA distinguishes between camera types — because a traffic camera and a Flock Safety ALPR are not the same thing.</p>
+    <div class="section-label" data-en="What We Track" data-es="Qué Rastreamos"></div>
+    <h2 data-en="Not all cameras are equal." data-es="No todas las cámaras son iguales."></h2>
+    <p class="section-intro" data-en="WATCHED.LA distinguishes between camera types because a traffic camera and a Flock Safety ALPR are not the same thing." data-es="WATCHED.LA distingue entre tipos de cámaras porque una cámara de tráfico y un ALPR de Flock Safety no son lo mismo."></p>
 
     <div class="camera-list">
       <div class="camera-row">
         <div class="camera-dot dot-red"></div>
         <div>
           <div class="camera-row-name">Flock Safety ALPR</div>
-          <div style="font-size:0.8rem;color:var(--muted);margin-top:2px;">Reads your license plate. Feeds into LAPD and the JRIC federal fusion center. Accessible to DHS and federal agencies.</div>
+          <div style="font-size:0.8rem;color:var(--muted);margin-top:2px;" data-en="Reads your license plate. Data reported to flow to LAPD and federal fusion centers." data-es="Lee tu placa. Se reporta que los datos fluyen al LAPD y centros de fusión federales."></div>
         </div>
-        <span class="camera-row-risk risk-critical">Critical</span>
+        <span class="camera-row-risk risk-critical" data-en="Critical" data-es="Crítico"></span>
       </div>
       <div class="camera-row">
         <div class="camera-dot dot-red"></div>
         <div>
-          <div class="camera-row-name">LAPD PTZ Camera</div>
-          <div style="font-size:0.8rem;color:var(--muted);margin-top:2px;">Actively tracked. Feeds LAPD's Real-Time Analysis Division. Clearview AI facial recognition integration documented.</div>
+          <div class="camera-row-name" data-en="LAPD PTZ Camera" data-es="Cámara PTZ del LAPD"></div>
+          <div style="font-size:0.8rem;color:var(--muted);margin-top:2px;" data-en="Actively tracked. Feeds LAPD's Real-Time Analysis Division." data-es="Rastreada activamente. Alimenta la División de Análisis en Tiempo Real del LAPD."></div>
         </div>
-        <span class="camera-row-risk risk-critical">Critical</span>
+        <span class="camera-row-risk risk-critical" data-en="Critical" data-es="Crítico"></span>
       </div>
       <div class="camera-row">
         <div class="camera-dot dot-orange"></div>
         <div>
-          <div class="camera-row-name">Speed Camera (AB 645)</div>
-          <div style="font-size:0.8rem;color:var(--muted);margin-top:2px;">Captures your plate and speed. Civil fines $50–$500. 125 locations approved by LA City Council in 2026.</div>
+          <div class="camera-row-name" data-en="Speed Camera (AB 645)" data-es="Cámara de Velocidad (AB 645)"></div>
+          <div style="font-size:0.8rem;color:var(--muted);margin-top:2px;" data-en="Captures your plate and speed. Civil fines $50–$500. 125 locations in LA." data-es="Captura tu placa y velocidad. Multas civiles $50–$500. 125 ubicaciones en LA."></div>
         </div>
-        <span class="camera-row-risk risk-high">High</span>
+        <span class="camera-row-risk risk-high" data-en="High" data-es="Alto"></span>
       </div>
       <div class="camera-row">
         <div class="camera-dot dot-yellow"></div>
         <div>
-          <div class="camera-row-name">LADOT Traffic Camera</div>
-          <div style="font-size:0.8rem;color:var(--muted);margin-top:2px;">Monitors traffic flow. Data retained 72 hours to 30 days. Some have public live feeds viewable in the app.</div>
+          <div class="camera-row-name" data-en="LADOT Traffic Camera" data-es="Cámara de Tráfico LADOT"></div>
+          <div style="font-size:0.8rem;color:var(--muted);margin-top:2px;" data-en="Monitors traffic flow. Data retained 72 hours to 30 days." data-es="Monitorea flujo de tráfico. Datos retenidos de 72 horas a 30 días."></div>
         </div>
-        <span class="camera-row-risk risk-medium">Medium</span>
+        <span class="camera-row-risk risk-medium" data-en="Medium" data-es="Medio"></span>
       </div>
     </div>
   </div>
@@ -534,68 +489,68 @@
 <!-- Privacy promise -->
 <section style="background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
   <div class="container">
-    <div class="section-label">Our Promise</div>
-    <h2>We practice what we preach.</h2>
-    <p class="section-intro">An app about surveillance shouldn't surveil you.</p>
+    <div class="section-label" data-en="Our Promise" data-es="Nuestra Promesa"></div>
+    <h2 data-en="We practice what we preach." data-es="Practicamos lo que predicamos."></h2>
+    <p class="section-intro" data-en="An app about surveillance shouldn't surveil you." data-es="Una app sobre vigilancia no debería vigilarte."></p>
 
     <div class="promise-grid">
       <div class="promise-card">
         <div class="icon">📵</div>
-        <h4>No Account</h4>
-        <p>Open the app and go. No sign-up, no email, no profile.</p>
+        <h4 data-en="No Account" data-es="Sin Cuenta"></h4>
+        <p data-en="Open the app and go. No sign-up, no email, no profile." data-es="Abre la app y listo. Sin registro, sin email, sin perfil."></p>
       </div>
       <div class="promise-card">
         <div class="icon">📍</div>
-        <h4>Location Stays Local</h4>
-        <p>GPS is used only on your device. We never see where you are.</p>
+        <h4 data-en="Location Stays Local" data-es="Ubicación Local"></h4>
+        <p data-en="GPS is used only on your device. We never see where you are." data-es="El GPS se usa solo en tu dispositivo. Nunca vemos dónde estás."></p>
       </div>
       <div class="promise-card">
         <div class="icon">🚫</div>
-        <h4>No Analytics</h4>
-        <p>No crash reporting SDKs, no ad trackers, no third-party data sharing.</p>
+        <h4 data-en="No Analytics" data-es="Sin Analíticas"></h4>
+        <p data-en="No crash reporting SDKs, no ad trackers, no third-party data sharing." data-es="Sin SDKs de reportes, sin rastreadores de anuncios, sin compartir datos."></p>
       </div>
       <div class="promise-card">
         <div class="icon">📖</div>
-        <h4>Public Data Only</h4>
-        <p>Every camera in the app is sourced from public records and open community data.</p>
+        <h4 data-en="Public Data Only" data-es="Solo Datos Públicos"></h4>
+        <p data-en="Every camera is sourced from public records and open community data." data-es="Cada cámara proviene de registros públicos y datos comunitarios abiertos."></p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Partners / Orgs -->
+<!-- Partners -->
 <section>
   <div class="container">
-    <div class="section-label">Part of a Bigger Fight</div>
-    <h2>We're not alone.</h2>
-    <p class="section-intro">WATCHED.LA is part of a growing ecosystem of organizations fighting surveillance in Los Angeles. Learn more and get involved.</p>
+    <div class="section-label" data-en="Community" data-es="Comunidad"></div>
+    <h2 data-en="We're not alone." data-es="No estamos solos."></h2>
+    <p class="section-intro" data-en="WATCHED.LA is part of a growing ecosystem of organizations working on surveillance accountability in Los Angeles." data-es="WATCHED.LA es parte de un ecosistema creciente de organizaciones que trabajan en la rendición de cuentas de vigilancia en Los Ángeles."></p>
 
     <div class="partner-links">
       <a href="https://stoplapdspying.org" target="_blank" class="partner-link">
         <div>
           <div class="name">Stop LAPD Spying Coalition</div>
-          <div class="desc">Community-led organization fighting LAPD surveillance in Los Angeles.</div>
+          <div class="desc" data-en="Community-led organization working on LAPD surveillance accountability." data-es="Organización comunitaria que trabaja en la rendición de cuentas de vigilancia del LAPD."></div>
         </div>
         <span class="arrow">↗</span>
       </a>
       <a href="https://www.aclusocal.org/know-your-rights" target="_blank" class="partner-link">
         <div>
-          <div class="name">ACLU of Southern California — Know Your Rights</div>
-          <div class="desc">Legal resources for your rights around surveillance and policing in California.</div>
+          <div class="name" data-en="ACLU of Southern California: Know Your Rights" data-es="ACLU del Sur de California: Conoce Tus Derechos"></div>
+          <div class="desc" data-en="Legal resources for your rights around surveillance and policing in California." data-es="Recursos legales sobre tus derechos de vigilancia y policía en California."></div>
         </div>
         <span class="arrow">↗</span>
       </a>
       <a href="https://ssd.eff.org" target="_blank" class="partner-link">
         <div>
-          <div class="name">EFF — Surveillance Self-Defense</div>
-          <div class="desc">Practical guides to protect your privacy in public and online.</div>
+          <div class="name" data-en="EFF: Surveillance Self-Defense" data-es="EFF: Autodefensa contra la Vigilancia"></div>
+          <div class="desc" data-en="Practical guides to protect your privacy in public and online." data-es="Guías prácticas para proteger tu privacidad en público y en línea."></div>
         </div>
         <span class="arrow">↗</span>
       </a>
       <a href="https://notechforice.com" target="_blank" class="partner-link">
         <div>
-          <div class="name">Mijente — No Tech for ICE</div>
-          <div class="desc">Fighting surveillance technology used against immigrant communities.</div>
+          <div class="name" data-en="Mijente: No Tech for ICE" data-es="Mijente: Sin Tecnología para ICE"></div>
+          <div class="desc" data-en="Advocacy against surveillance technology used on immigrant communities." data-es="Defensa contra la tecnología de vigilancia usada en comunidades inmigrantes."></div>
         </div>
         <span class="arrow">↗</span>
       </a>
@@ -606,14 +561,16 @@
 <!-- Footer CTA -->
 <section class="footer-cta">
   <div class="container">
-    <h2>Be first to know<br>when it launches.</h2>
-    <p>Free iOS app. Launching in Los Angeles soon.</p>
+    <h2 data-en='Try it now.<br>Know what's watching you.' data-es='Pruébalo ahora.<br>Conoce quién te vigila.'></h2>
+    <p data-en="Free on iPhone. Available via TestFlight beta." data-es="Gratis en iPhone. Disponible por TestFlight beta."></p>
 
-    <form class="signup-form" onsubmit="handleSignup(event)">
-      <input type="email" placeholder="your@email.com" required />
-      <button type="submit">Notify Me</button>
-    </form>
-    <p class="signup-note" style="margin-top:12px;">No spam. One email when the app is live.</p>
+    <div class="cta-group">
+      <a href="#" class="btn-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        <span data-en="Get Early Access via TestFlight" data-es="Acceso Anticipado por TestFlight"></span>
+      </a>
+    </div>
+    <p class="cta-note" style="margin-top:16px;" data-en="iPhone only. No account required. No data collected." data-es="Solo iPhone. Sin cuenta. Sin datos recolectados."></p>
   </div>
 </section>
 
@@ -622,35 +579,49 @@
   <div class="container">
     <p>
       <strong>WATCHED.LA</strong><br>
-      A public interest project. Free forever. No investors. No ads.<br>
-      Camera data sourced from OpenStreetMap, FOIA disclosures, and public agency records.<br><br>
-      <a href="mailto:ra@robertangelo.com">Contact</a> ·
-      <a href="#privacy">Privacy Policy</a> ·
-      Built in Los Angeles
+      <span data-en="A public interest project. Free forever. No investors. No ads." data-es="Un proyecto de interés público. Gratis por siempre. Sin inversionistas. Sin anuncios."></span><br>
+      <span data-en="Camera data sourced from OpenStreetMap, FOIA disclosures, and public agency records." data-es="Datos de cámaras de OpenStreetMap, divulgaciones FOIA, y registros de agencias públicas."></span><br><br>
+      <a href="mailto:support@watchedla.com">Contact</a> ·
+      <a href="privacy.html" data-en="Privacy Policy" data-es="Política de Privacidad"></a> ·
+      <span data-en="Built in Los Angeles" data-es="Hecho en Los Ángeles"></span>
     </p>
   </div>
 </footer>
 
 <script>
-  function handleSignup(e) {
-    e.preventDefault();
-    const form = e.target;
-    const btn = form.querySelector('button');
-    const msgEl = document.getElementById('signup-msg');
+  let currentLang = 'en';
 
-    // Visual feedback
-    btn.textContent = '✓ You\'re on the list';
-    btn.style.background = '#22c55e';
-    btn.disabled = true;
+  function setLang(lang) {
+    currentLang = lang;
 
-    if (msgEl) {
-      msgEl.textContent = 'Thanks! We\'ll let you know the moment it\'s live.';
-      msgEl.style.color = '#22c55e';
-    }
+    // Toggle button styles
+    document.querySelectorAll('.lang-toggle button').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.trim() === lang.toUpperCase());
+    });
 
-    // TODO: wire to Mailchimp / Buttondown / ConvertKit endpoint
-    // fetch('/api/signup', { method: 'POST', body: JSON.stringify({ email: form.querySelector('input').value }) })
+    // Update all data-en/data-es elements
+    document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+      const text = el.getAttribute('data-' + lang);
+      if (el.tagName === 'INPUT') {
+        el.placeholder = text;
+      } else {
+        el.innerHTML = text;
+      }
+    });
+
+    // Update HTML lang attribute
+    document.documentElement.lang = lang;
   }
+
+  // Auto-detect language from browser
+  (function() {
+    const browserLang = navigator.language || navigator.userLanguage || 'en';
+    if (browserLang.startsWith('es')) {
+      setLang('es');
+    } else {
+      setLang('en');
+    }
+  })();
 </script>
 
 </body>
