@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Disclaimer · WatchedLA.com</title>
+  <meta name="robots" content="noindex" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: #141414;
+      --border: #222;
+      --text: #e8e8e8;
+      --muted: #888;
+      --accent: #4ade80;
+      --warn: #facc15;
+      --red: #f87171;
+      --radius: 8px;
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.7;
+      padding: 0 1rem;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2.5rem 0 5rem;
+    }
+
+    .back {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      color: var(--muted);
+      font-size: .9rem;
+      margin-bottom: 2rem;
+      transition: color .15s;
+    }
+    .back:hover { color: var(--text); text-decoration: none; }
+
+    .lang-toggle {
+      display: inline-flex;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 2.5rem;
+    }
+    .lang-toggle button {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-family: var(--font);
+      font-size: .875rem;
+      padding: .4rem .9rem;
+      cursor: pointer;
+      transition: background .15s, color .15s;
+    }
+    .lang-toggle button.active {
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -.02em;
+      margin-bottom: .5rem;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: .875rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .alert {
+      background: #1a1000;
+      border: 1px solid #3a2800;
+      border-left: 4px solid var(--warn);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      margin-bottom: 2.5rem;
+      font-size: .95rem;
+      color: #fde68a;
+    }
+
+    .section {
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .section:last-of-type { border-bottom: none; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      margin-bottom: .75rem;
+    }
+
+    .section-icon {
+      font-size: 1.25rem;
+      line-height: 1;
+    }
+
+    h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: -.01em;
+    }
+
+    p { color: #c8c8c8; margin-bottom: .6rem; }
+    p:last-child { margin-bottom: 0; }
+
+    .footer {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: .85rem;
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    [lang-content] { display: none; }
+    [lang-content].visible { display: block; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <a class="back" href="https://www.watchedla.com/">← Back to WatchedLA.com</a>
+
+  <div class="lang-toggle" role="group" aria-label="Language">
+    <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+    <button id="btn-es" onclick="setLang('es')">ES</button>
+  </div>
+
+  <!-- ═══════════════════════════════ ENGLISH ═══════════════════════════════ -->
+  <div id="content-en" lang-content class="visible">
+
+    <h1>Disclaimer</h1>
+    <p class="meta">Effective: April 10, 2026 · Last updated: April 10, 2026</p>
+
+    <div class="alert">
+      By using WatchedLA, you acknowledge that you have read and understood this disclaimer. This app is an educational awareness tool, not a safety guarantee and not legal advice.
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">⚠️</span>
+        <h2>Camera Data Is Incomplete</h2>
+      </div>
+      <p>The camera database does not include every surveillance camera in Los Angeles. New cameras are installed regularly, and not all cameras are mapped in OpenStreetMap or publicly disclosed. Private cameras on private property, temporary law enforcement deployments, and cameras installed after the last data update will not appear in the app.</p>
+      <p>The absence of a camera marker does not mean an area is free of surveillance.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">🛡️</span>
+        <h2>This App Does Not Make You Safe</h2>
+      </div>
+      <p>Route scores and camera counts are informational only. A route with a lower Privacy Score may still pass cameras not in our database. Using WatchedLA does not protect you from surveillance, harassment, or harm. Do not rely on this app for personal safety decisions.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">📊</span>
+        <h2>Route Scores Are Estimates</h2>
+      </div>
+      <p>Privacy Scores are calculated based on the number and type of mapped cameras along a route. They are estimates, not audited measurements. The scoring model may not reflect operational status, camera direction, resolution, or real-time data-sharing agreements between agencies.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">⚖️</span>
+        <h2>Not Legal Advice</h2>
+      </div>
+      <p>The Know Your Rights content in WatchedLA describes California privacy laws and regulations as general educational information only. It does not constitute legal advice and does not create an attorney-client relationship. Laws change. Enforcement varies. For advice about your specific situation, consult a licensed attorney.</p>
+      <p>Legal information is current as of 2025–2026 and may not reflect subsequent changes.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">🗂️</span>
+        <h2>Data Accuracy Not Guaranteed</h2>
+      </div>
+      <p>Camera locations, classifications, and agency attribution are sourced from OpenStreetMap contributors, FOIA disclosures, published public records, and investigative journalism. This data may contain errors, outdated information, or misclassifications. WatchedLA makes no representations about the accuracy or completeness of the camera database.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">💡</span>
+        <h2>Why We Built This</h2>
+      </div>
+      <p>WatchedLA is a free public interest project. We built it because we believe people have a right to understand the surveillance infrastructure in their city. We are not lawyers, we are not a security company, and we do not provide professional advice of any kind.</p>
+      <p>This app exists to inform. What you do with that information is your choice.</p>
+    </div>
+
+  </div>
+  <!-- end English -->
+
+  <!-- ═══════════════════════════════ SPANISH ═══════════════════════════════ -->
+  <div id="content-es" lang-content>
+
+    <h1>Aviso Legal</h1>
+    <p class="meta">Vigente: 10 de abril de 2026 · Última actualización: 10 de abril de 2026</p>
+
+    <div class="alert">
+      Al usar WatchedLA, reconoces que has leído y comprendido este aviso. Esta aplicación es una herramienta educativa, no una garantía de seguridad ni asesoramiento legal.
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">⚠️</span>
+        <h2>La Base de Datos de Cámaras Es Incompleta</h2>
+      </div>
+      <p>La base de datos de cámaras no incluye todas las cámaras de vigilancia de Los Ángeles. Se instalan cámaras nuevas con frecuencia y no todas están documentadas en OpenStreetMap ni en registros públicos. Las cámaras privadas en propiedades privadas, los despliegues temporales de las fuerzas del orden y las cámaras instaladas después de la última actualización de datos no aparecerán en la aplicación.</p>
+      <p>La ausencia de un marcador de cámara no significa que una zona esté libre de vigilancia.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">🛡️</span>
+        <h2>Esta Aplicación No Te Protege</h2>
+      </div>
+      <p>Las puntuaciones de rutas y los recuentos de cámaras son únicamente informativos. Una ruta con una puntuación de privacidad más baja puede igualmente pasar frente a cámaras que no están en nuestra base de datos. Usar WatchedLA no te protege de la vigilancia, el acoso ni el daño. No dependas de esta aplicación para tomar decisiones de seguridad personal.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">📊</span>
+        <h2>Las Puntuaciones de Rutas Son Estimaciones</h2>
+      </div>
+      <p>Las Puntuaciones de Privacidad se calculan en función del número y tipo de cámaras documentadas a lo largo de una ruta. Son estimaciones, no mediciones auditadas. El modelo de puntuación puede no reflejar el estado operativo, la dirección de la cámara, la resolución ni los acuerdos de intercambio de datos entre agencias.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">⚖️</span>
+        <h2>No Es Asesoramiento Legal</h2>
+      </div>
+      <p>El contenido de "Conoce tus Derechos" en WatchedLA describe las leyes y regulaciones de privacidad de California únicamente como información educativa general. No constituye asesoramiento legal ni establece una relación abogado-cliente. Las leyes cambian. La aplicación varía. Para obtener asesoramiento sobre tu situación específica, consulta a un abogado con licencia.</p>
+      <p>La información legal está actualizada a 2025–2026 y puede no reflejar cambios posteriores.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">🗂️</span>
+        <h2>No Se Garantiza la Exactitud de los Datos</h2>
+      </div>
+      <p>Las ubicaciones de las cámaras, las clasificaciones y la atribución a agencias provienen de colaboradores de OpenStreetMap, divulgaciones FOIA, registros públicos publicados y periodismo de investigación. Estos datos pueden contener errores, información desactualizada o clasificaciones incorrectas. WatchedLA no ofrece garantías sobre la exactitud ni la integridad de la base de datos de cámaras.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">💡</span>
+        <h2>Por Qué Construimos Esto</h2>
+      </div>
+      <p>WatchedLA es un proyecto de interés público gratuito. Lo construimos porque creemos que las personas tienen derecho a comprender la infraestructura de vigilancia de su ciudad. No somos abogados, no somos una empresa de seguridad y no brindamos ningún tipo de asesoramiento profesional.</p>
+      <p>Esta aplicación existe para informar. Lo que hagas con esa información es tu decisión.</p>
+    </div>
+
+  </div>
+  <!-- end Spanish -->
+
+  <div class="footer">
+    <a href="https://www.watchedla.com/">WatchedLA.com</a> ·
+    <a href="https://www.watchedla.com/privacy">Privacy Policy</a> ·
+    hello@watchedla.com<br>
+    A public interest project. Free forever. No investors. No ads. Built in Los Angeles.
+  </div>
+
+</div>
+
+<script>
+  function setLang(lang) {
+    document.getElementById('content-en').classList.toggle('visible', lang === 'en');
+    document.getElementById('content-es').classList.toggle('visible', lang === 'es');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+    document.documentElement.lang = lang;
+  }
+</script>
+</body>
+</html>
