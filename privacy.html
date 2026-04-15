@@ -24,13 +24,20 @@
     .back { display: inline-block; margin-bottom: 24px; font-size: 0.9rem; color: #888; }
     .back:hover { color: #f0f0f5; }
     strong { color: #f0f0f5; }
+    .footer-links {
+      margin-top: 40px; padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      font-size: 0.82rem; color: #666; line-height: 1.8;
+    }
+    .footer-links a { color: #888; }
+    .footer-links a:hover { color: #f0f0f5; }
   </style>
 </head>
 <body>
 <div class="container">
   <a href="/" class="back">← Back to WatchedLA.com</a>
   <h1>Privacy Policy</h1>
-  <p class="date">Effective: April 10, 2026 · Last updated: April 10, 2026</p>
+  <p class="date">Effective: April 10, 2026 · Last updated: April 14, 2026</p>
 
   <p>WatchedLA.com ("we," "our," or "the app") is a free public interest project. This privacy policy explains what data we collect (almost none) and how the app works.</p>
 
@@ -50,7 +57,7 @@
   <ul>
     <li><strong>Saved places</strong>: Stored locally using iOS UserDefaults.</li>
     <li><strong>Route history</strong>: Stored locally on your device only.</li>
-    <li><strong>Scan results</strong>: Camera proximity checks happen on-device by comparing your GPS to the bundled camera database. No network requests are made.</li>
+    <li><strong>Scan results</strong>: Camera proximity checks happen on-device by comparing your GPS to the bundled camera database. No network requests are made for this check.</li>
     <li><strong>Language preference</strong>: Your English/Spanish choice is stored locally.</li>
   </ul>
 
@@ -66,7 +73,7 @@
 
   <h2>Third-Party Services</h2>
   <p>When you tap "Open in Apple Maps," "Open in Google Maps," or "Open in Waze," the app sends your selected destination coordinates to that third-party maps application. This is a standard iOS URL scheme handoff. WatchedLA.com does not control what those apps do with that data. Please refer to their respective privacy policies.</p>
-  <p>Apple's MapKit framework is used to display the in-app map. Apple's MapKit privacy terms apply to map tile loading.</p>
+  <p>Apple's MapKit framework is used to display the in-app map. Apple's MapKit privacy terms apply to map tile loading. When the app refreshes camera data from the Overpass API, your device's IP address is visible to those servers. We do not control or have access to any data those services may log.</p>
 
   <h2>Location Permissions</h2>
   <p>The app requests "When In Use" location permission to:</p>
@@ -86,10 +93,12 @@
   <h2>Contact</h2>
   <p>Questions about this privacy policy? Email us at <a href="mailto:hello@watchedla.com">hello@watchedla.com</a>.</p>
 
-  <p style="margin-top:40px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.07); font-size:0.82rem; color:#666;">
-    WatchedLA.com is a public interest project. Free forever. No investors. No ads.<br>
-    Built in Los Angeles.
-  </p>
+  <div class="footer-links">
+    <a href="/">WatchedLA.com</a> ·
+    <a href="/disclaimer">Disclaimer</a> ·
+    hello@watchedla.com<br>
+    A public interest project. Free forever. No investors. No ads. Built in Los Angeles.
+  </div>
 </div>
 </body>
 </html>
