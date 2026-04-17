@@ -4,8 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Privacy Policy | WatchedLA.com</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -18,12 +16,17 @@
     h1 { font-size: 2rem; font-weight: 800; margin-bottom: 8px; }
     .date { font-size: 0.85rem; color: #888; margin-bottom: 40px; }
     h2 { font-size: 1.3rem; font-weight: 700; margin: 36px 0 12px; color: #3b82f6; }
+    h3 { font-size: 1.05rem; font-weight: 600; margin: 20px 0 8px; color: #ddd; }
     p, li { font-size: 0.95rem; color: #ccc; margin-bottom: 14px; }
     ul { padding-left: 20px; }
     li { margin-bottom: 8px; }
     .back { display: inline-block; margin-bottom: 24px; font-size: 0.9rem; color: #888; }
     .back:hover { color: #f0f0f5; }
     strong { color: #f0f0f5; }
+    .endpoint-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.88rem; }
+    .endpoint-table th, .endpoint-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .endpoint-table th { color: #888; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .endpoint-table td { color: #ccc; }
     .footer-links {
       margin-top: 40px; padding-top: 20px;
       border-top: 1px solid rgba(255,255,255,0.07);
@@ -37,29 +40,70 @@
 <div class="container">
   <a href="/" class="back">← Back to WatchedLA.com</a>
   <h1>Privacy Policy</h1>
-  <p class="date">Effective: April 10, 2026 · Last updated: April 14, 2026</p>
+  <p class="date">Effective: April 10, 2026 · Last updated: April 17, 2026</p>
 
-  <p>WatchedLA.com ("we," "our," or "the app") is a free public interest project. This privacy policy explains what data we collect (almost none) and how the app works.</p>
+  <p>WatchedLA.com ("we," "our," or "the app") is a free public interest project. This privacy policy explains what data we collect, what stays on your device, and what network requests the app makes on your behalf.</p>
 
   <h2>The Short Version</h2>
-  <p><strong>We collect nothing.</strong> No account, no analytics, no tracking. Your location never leaves your iPhone. We don't know who you are.</p>
+  <p><strong>We do not operate any servers that receive your data.</strong> No account, no analytics, no tracking. We don't know who you are. However, some app features make network requests to third-party services on your behalf. Those services may log your device's IP address. We detail every such request below.</p>
 
   <h2>Data We Do NOT Collect</h2>
   <ul>
-    <li><strong>Location data</strong>: Your GPS coordinates are processed entirely on your device. We never transmit, store, or access your location.</li>
     <li><strong>Personal information</strong>: No name, email, phone number, or account of any kind is required.</li>
     <li><strong>Usage analytics</strong>: No crash reporting SDKs, no event tracking, no session recording.</li>
     <li><strong>Advertising identifiers</strong>: No ad SDKs, no IDFA access, no third-party trackers.</li>
-    <li><strong>Routes or searches</strong>: Your route searches and saved places are stored only on your device. We never see them.</li>
+    <li><strong>Server-side storage</strong>: We operate no backend servers. Nothing you do in this app is transmitted to us.</li>
   </ul>
 
   <h2>Data That Stays on Your Device</h2>
   <ul>
-    <li><strong>Saved places</strong>: Stored locally using iOS UserDefaults.</li>
-    <li><strong>Route history</strong>: Stored locally on your device only.</li>
-    <li><strong>Scan results</strong>: Camera proximity checks happen on-device by comparing your GPS to the bundled camera database. No network requests are made for this check.</li>
+    <li><strong>Saved places</strong>: Home, Work, and other saved locations are stored locally in an encrypted file on your device only. They are excluded from iCloud backup and cannot be accessed by other apps.</li>
+    <li><strong>Route history</strong>: Past route searches are stored locally in an encrypted file on your device only. They are excluded from iCloud backup. You can clear your history at any time from the app.</li>
+    <li><strong>Scan results</strong>: Camera proximity checks happen entirely on-device by comparing your GPS to the bundled camera database. No network requests are made for proximity scanning.</li>
     <li><strong>Language preference</strong>: Your English/Spanish choice is stored locally.</li>
+    <li><strong>Disclaimer acknowledgment</strong>: A simple flag noting you accepted the disclaimer. No content is stored.</li>
   </ul>
+
+  <h2>Network Requests the App Makes</h2>
+  <p>Watched LA makes the following network requests while you use the app. <strong>We do not control or have access to any data these services may log.</strong></p>
+
+  <table class="endpoint-table">
+    <thead>
+      <tr><th>Feature</th><th>Service</th><th>What is sent</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Address search (autocomplete)</td>
+        <td>Apple MapKit</td>
+        <td>Each keystroke of your search text, resolved coordinates. Subject to <a href="https://www.apple.com/legal/privacy/">Apple's privacy policy</a>.</td>
+      </tr>
+      <tr>
+        <td>Route directions</td>
+        <td>Apple MapKit Directions</td>
+        <td>Origin and destination coordinates. Subject to Apple's privacy policy.</td>
+      </tr>
+      <tr>
+        <td>Map tiles</td>
+        <td>Apple MapKit</td>
+        <td>The visible map region. Subject to Apple's privacy policy.</td>
+      </tr>
+      <tr>
+        <td>Address search (fallback geocoding)</td>
+        <td>OpenStreetMap Nominatim (<code>nominatim.openstreetmap.org</code>)</td>
+        <td>The address text you typed, your device's IP address, and a User-Agent header identifying this app. Subject to <a href="https://osmfoundation.org/wiki/Privacy_Policy">OSMF's privacy policy</a>.</td>
+      </tr>
+      <tr>
+        <td>Camera database refresh</td>
+        <td>OpenStreetMap Overpass API (<code>overpass-api.de</code>)</td>
+        <td>A geographic bounding box for the Los Angeles area (not your location). Your device's IP address is visible to the server.</td>
+      </tr>
+      <tr>
+        <td>Live traffic camera feeds</td>
+        <td>LADOT ATSAC (<code>atsac.lacity.org</code>)</td>
+        <td>The camera ID you selected. Your device's IP address is visible to the city server. Camera IDs correspond to specific intersections.</td>
+      </tr>
+    </tbody>
+  </table>
 
   <h2>Camera Database</h2>
   <p>The app includes a bundled database of surveillance camera locations in Los Angeles. This data comes from:</p>
@@ -69,26 +113,26 @@
     <li>Published city council disclosures</li>
     <li>Investigative journalism and community reporting</li>
   </ul>
-  <p>The camera database is <strong>bundled into the app</strong> for immediate offline mapping. Additionally, the app makes background network requests to the OpenStreetMap Overpass API (overpass-api.de) to refresh the camera database with newly contributed data. No personal data, location, or device identifiers are transmitted in these requests. The request contains only a geographic bounding box for the Los Angeles area.</p>
-
-  <h2>Third-Party Services</h2>
-  <p>When you tap "Open in Apple Maps," "Open in Google Maps," or "Open in Waze," the app sends your selected destination coordinates to that third-party maps application. This is a standard iOS URL scheme handoff. WatchedLA.com does not control what those apps do with that data. Please refer to their respective privacy policies.</p>
-  <p>Apple's MapKit framework is used to display the in-app map. Apple's MapKit privacy terms apply to map tile loading. When the app refreshes camera data from the Overpass API, your device's IP address is visible to those servers. We do not control or have access to any data those services may log.</p>
+  <p>The camera database is <strong>bundled into the app</strong> for immediate offline mapping. The app also makes background requests to the OpenStreetMap Overpass API to refresh this data. See the table above for details.</p>
 
   <h2>Location Permissions</h2>
-  <p>The app requests "When In Use" location permission to:</p>
+  <p>The app requests location permission to:</p>
   <ul>
     <li>Show your position on the map</li>
-    <li>Check for cameras near your current location</li>
+    <li>Check for cameras near your current location (on-device only)</li>
     <li>Auto-fill "Current Location" as your starting point for routes</li>
+    <li>Day Recording: if you enable background recording, the app tracks your movement to log camera encounters in real time. This requires "Always" location permission. Your trail data is stored only on your device.</li>
   </ul>
   <p>You can deny location access and still browse the camera map and search for routes between addresses.</p>
+
+  <h2>Third-Party Map Handoff</h2>
+  <p>When you tap "Open in Apple Maps," "Open in Google Maps," or "Open in Waze," the app sends your selected destination coordinates to that third-party maps application. WatchedLA.com does not control what those apps do with that data. Please refer to their respective privacy policies.</p>
 
   <h2>Children's Privacy</h2>
   <p>WatchedLA.com is not directed at children under 13. We do not knowingly collect information from children.</p>
 
   <h2>Changes to This Policy</h2>
-  <p>If we ever change this policy, we will update this page and the effective date above. Since we collect no data, changes would likely only clarify existing practices.</p>
+  <p>If we change this policy, we will update this page and the effective date above.</p>
 
   <h2>Contact</h2>
   <p>Questions about this privacy policy? Email us at <a href="mailto:hello@watchedla.com">hello@watchedla.com</a>.</p>

@@ -9,8 +9,7 @@
   <meta property="og:description" content="Know which cameras are watching you in Los Angeles. Free iPhone app. No data collected. Get the app now." />
   <meta property="og:url" content="https://watchedla.com" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Inter font loaded via system font stack for privacy (no third-party requests on marketing page) -->
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -241,6 +240,7 @@
     .risk-critical { background: rgba(239,68,68,0.12); color: var(--red); }
     .risk-high { background: rgba(249,115,22,0.12); color: var(--orange); }
     .risk-medium { background: rgba(234,179,8,0.12); color: #eab308; }
+    .risk-source { font-size: 0.7rem; color: var(--muted); font-style: italic; margin-top: 4px; }
 
     /* ── Partners ── */
     .partner-links { display: flex; flex-direction: column; gap: 12px; }
@@ -304,10 +304,10 @@
         <span data-en="Get the App" data-es="Obtener la App"></span>
       </a>
     </div>
-    <p class="cta-note" data-en="Free on iPhone. No account required. No data collected." data-es="Gratis en iPhone. Sin cuenta. Sin datos recolectados."></p>
+    <p class="cta-note" data-en="Free on iPhone. No account required. We operate no servers that receive your data." data-es="Gratis en iPhone. Sin cuenta. No operamos servidores que reciban tus datos."></p>
     <div class="platform-note">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-      <span data-en="iPhone only. Android coming soon." data-es="Solo iPhone. Android próximamente."></span>
+      <span data-en="iPhone only for now." data-es="Solo iPhone por ahora."></span>
     </div>
 
     <div class="stat-bar">
@@ -434,8 +434,8 @@
       <div class="step">
         <div class="step-num">4</div>
         <div>
-          <h4 data-en="Everything Stays on Your iPhone" data-es="Todo Se Queda en Tu iPhone"></h4>
-          <p data-en="WatchedLA.com never sends your location, routes, or searches to any server. We don't know who you are. Processing happens entirely on your device." data-es="WatchedLA.com nunca envía tu ubicación, rutas, o búsquedas a ningún servidor. No sabemos quién eres. Todo el procesamiento ocurre en tu dispositivo."></p>
+          <h4 data-en="We Operate No Servers" data-es="No Operamos Servidores"></h4>
+          <p data-en="We don't know who you are. Your routes and saved places are encrypted on your device and excluded from iCloud backup. Address searches use Apple MapKit and OpenStreetMap on your behalf. Full details in our privacy policy." data-es="No sabemos quién eres. Tus rutas y lugares guardados están encriptados en tu dispositivo y excluidos de la copia de seguridad de iCloud. Las búsquedas de direcciones usan Apple MapKit y OpenStreetMap en tu nombre. Detalles completos en nuestra política de privacidad."></p>
         </div>
       </div>
     </div>
@@ -454,25 +454,28 @@
         <div class="camera-dot dot-red"></div>
         <div>
           <div class="camera-row-name">Flock Safety ALPR</div>
-          <div style="font-size:0.8rem;color:var(--muted);margin-top:2px;" data-en="Reads your license plate. Data has been reported to flow to LAPD and federal fusion centers." data-es="Lee tu placa. Se ha reportado que los datos fluyen al LAPD y centros de fusión federales."></div>
+          <div style="font-size:0.8rem;color:var(--muted);margin-top:2px;" data-en="Reads your license plate. Data has been reported to flow to LAPD and federal databases, per investigative reporting and public records requests." data-es="Lee tu placa. Según reportajes investigativos y solicitudes de registros públicos, se ha reportado que los datos fluyen al LAPD y bases de datos federales."></div>
+          <div class="risk-source" data-en="Sources: EFF, Stop LAPD Spying Coalition, FOIA disclosures" data-es="Fuentes: EFF, Stop LAPD Spying Coalition, divulgaciones FOIA"></div>
         </div>
-        <span class="camera-row-risk risk-critical" data-en="Critical" data-es="Crítico"></span>
+        <span class="camera-row-risk risk-critical" data-en="High Concern" data-es="Alta Preocupación"></span>
       </div>
       <div class="camera-row">
         <div class="camera-dot dot-red"></div>
         <div>
           <div class="camera-row-name" data-en="LAPD PTZ Camera" data-es="Cámara PTZ del LAPD"></div>
-          <div style="font-size:0.8rem;color:var(--muted);margin-top:2px;" data-en="Pan-tilt-zoom cameras operated by LAPD. Reported to feed the Real-Time Analysis and Critical Response Division." data-es="Cámaras panorámicas operadas por el LAPD. Se ha reportado que alimentan la División de Análisis en Tiempo Real y Respuesta Crítica."></div>
+          <div style="font-size:0.8rem;color:var(--muted);margin-top:2px;" data-en="Pan-tilt-zoom cameras operated by LAPD. Reported to feed the Real-Time Analysis and Critical Response Division, per city council disclosures." data-es="Cámaras panorámicas operadas por el LAPD. Según divulgaciones del concejo municipal, se reporta que alimentan la División de Análisis en Tiempo Real y Respuesta Crítica."></div>
+          <div class="risk-source" data-en="Sources: LAPD public disclosures, LA City Council records" data-es="Fuentes: divulgaciones públicas del LAPD, registros del Concejo de LA"></div>
         </div>
-        <span class="camera-row-risk risk-critical" data-en="Critical" data-es="Crítico"></span>
+        <span class="camera-row-risk risk-critical" data-en="High Concern" data-es="Alta Preocupación"></span>
       </div>
       <div class="camera-row">
         <div class="camera-dot dot-orange"></div>
         <div>
           <div class="camera-row-name" data-en="Speed Camera (AB 645)" data-es="Cámara de Velocidad (AB 645)"></div>
           <div style="font-size:0.8rem;color:var(--muted);margin-top:2px;" data-en="Captures plate and speed. Tiered civil fines starting at $50. Authorized at up to 125 LA locations under AB 645." data-es="Captura placa y velocidad. Multas civiles escalonadas desde $50. Autorizadas en hasta 125 ubicaciones en LA bajo AB 645."></div>
+          <div class="risk-source" data-en="Source: California Assembly Bill 645 (2023)" data-es="Fuente: Proyecto de Ley AB 645 de California (2023)"></div>
         </div>
-        <span class="camera-row-risk risk-high" data-en="High" data-es="Alto"></span>
+        <span class="camera-row-risk risk-high" data-en="Elevated" data-es="Elevado"></span>
       </div>
       <div class="camera-row">
         <div class="camera-dot dot-yellow"></div>
@@ -483,6 +486,8 @@
         <span class="camera-row-risk risk-medium" data-en="Medium" data-es="Medio"></span>
       </div>
     </div>
+
+    <p style="font-size:0.78rem; color:var(--muted); margin-top:20px; line-height:1.6;" data-en="Risk classifications reflect our editorial assessment based on publicly available information, investigative journalism, and government disclosures. These are matters of public concern and represent our opinion. See our methodology for details." data-es="Las clasificaciones de riesgo reflejan nuestra evaluación editorial basada en información públicamente disponible, periodismo investigativo y divulgaciones gubernamentales. Estos son asuntos de interés público y representan nuestra opinión. Consulta nuestra metodología para más detalles."></p>
   </div>
 </section>
 
@@ -502,7 +507,7 @@
       <div class="promise-card">
         <div class="icon">📍</div>
         <h4 data-en="Location Stays Local" data-es="Ubicación Local"></h4>
-        <p data-en="GPS is used only on your device. We never see where you are." data-es="El GPS se usa solo en tu dispositivo. Nunca vemos dónde estás."></p>
+        <p data-en="GPS is processed on your device. We operate no servers. Address searches use Apple MapKit on your behalf." data-es="El GPS se procesa en tu dispositivo. No operamos servidores. Las búsquedas usan Apple MapKit en tu nombre."></p>
       </div>
       <div class="promise-card">
         <div class="icon">🚫</div>
@@ -577,7 +582,7 @@
         <span data-en="Get the App" data-es="Obtener la App"></span>
       </a>
     </div>
-    <p class="cta-note" style="margin-top:16px;" data-en="iPhone only. No account required. No data collected." data-es="Solo iPhone. Sin cuenta. Sin datos recolectados."></p>
+    <p class="cta-note" style="margin-top:16px;" data-en="iPhone only for now. No account required." data-es="Solo iPhone por ahora. Sin cuenta."></p>
   </div>
 </section>
 
@@ -612,8 +617,11 @@
       const text = el.getAttribute('data-' + lang);
       if (el.tagName === 'INPUT') {
         el.placeholder = text;
-      } else {
+      } else if (text.indexOf('<') !== -1) {
+        // Only use innerHTML for elements containing HTML tags (e.g. <br>, <em>, <strong>)
         el.innerHTML = text;
+      } else {
+        el.textContent = text;
       }
     });
 
